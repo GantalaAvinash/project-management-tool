@@ -1,9 +1,20 @@
+"use client";
+
 import Header from "@/components/Header";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 const Settings = () => {
+  const [user, setUser] = useState<string | null>(null);
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem(
+      "CognitoIdentityServiceProvider.7f0f1bs0g8j1n2p6qhtcemq4mu.LastAuthUser"
+    );
+    setUser(storedUser);
+  }, []);
+
   const userSettings = {
-    username: "johndoe",
+    username: user || "Guest",
     email: "john.doe@example.com",
     teamName: "Development Team",
     roleName: "Developer",
